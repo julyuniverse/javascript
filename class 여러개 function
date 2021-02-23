@@ -1,0 +1,6 @@
+let target = document.querySelectorAll('.item_quantity');
+target.forEach(function(e){
+  e.addEventListener('click',function(){
+      alert('실행됨');
+  });
+});
