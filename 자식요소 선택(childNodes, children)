@@ -1,0 +1,47 @@
+예:
+target.forEach(function(e) {
+  e.addEventListener("mouseover", function() {
+    console.log(e.childNodes.item(1));
+  })
+})
+
+여기서 childNodes는 텍스트 노드를 포함한 모든 자식 노드를 담고 있습니다.
+크롬 개발자 모드에서 볼시
+#text
+assignedSlot: null
+baseURI: "http://job.ye-ji.kr/index_bak20210223.php#"
+childNodes: NodeList []
+data: "↵						"
+firstChild: null
+isConnected: true
+lastChild: null
+length: 7
+nextElementSibling: ul.subMenu
+nextSibling: ul.subMenu
+nodeName: "#text"
+nodeType: 3
+nodeValue: "↵						"
+ownerDocument: document
+parentElement: li
+parentNode: li
+previousElementSibling: a
+previousSibling: a
+textContent: "↵						"
+wholeText: "↵						"
+__proto__: Text
+
+
+예:
+target.forEach(function(e) {
+  e.addEventListener("mouseover", function() {
+    console.log(e.children.item(1));
+  })
+})
+
+여기서 children는 해당 자식을 선택합니다.
+크롬 개발자 모드에서 볼시
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+ </ul>
