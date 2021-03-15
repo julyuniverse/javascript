@@ -1,0 +1,17 @@
+<script>
+//PC, Mobile 확인
+function isMobile() {
+  return navigator.userAgent.indexOf('Mobi') > -1;
+}
+
+//Mobile
+if(isMobile() == true) {
+	document.querySelector(".item1").href = "";
+	document.querySelector(".item2").href = "";
+
+//PC
+}else{
+	document.querySelector(".item1").href = "";
+	document.querySelector(".item2").href = "";
+}
+</script>
