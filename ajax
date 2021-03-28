@@ -1,0 +1,99 @@
+<!-- write.php -->
+
+<?php
+include "../include/common.php";
+include "../include/header.php";
+?>
+
+<table>
+    <thead>
+        <tr>
+            <th>IDX</th>
+            <th>이름</th>
+            <th>합격 여부</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $qry = "select * from applicant order by idx desc";
+        $result = mysqli_query($connect, $qry);
+        while($row = mysqli_fetch_array($result)) {
+        ?>
+        
+        <tr>
+            <td><?=$row['idx']?></td>
+            <td><?=$row['name']?></td>
+            <td>
+                <select name="pass">
+                    <option value="N|||<?=$row['idx']?>" <?php if($row['pass'] == "N") {echo "selected";} ?>>N</option>
+                    <option value="Y|||<?=$row['idx']?>" <?php if($row['pass'] == "Y") {echo "selected";} ?>>Y</option>
+                </select>            
+            </td>
+        </tr>
+
+        <?php
+        }
+        ?>
+    </tbody>
+</table>
+
+<script>
+//ajax 함수
+function sendRequest(target) {
+    let httpRequest = new XMLHttpRequest();
+    let tmpSplit = target.split("|||");
+    let idx = tmpSplit[1];
+    let status = tmpSplit[0];
+
+    let data = {idx: idx, status: status};
+
+    httpRequest.onreadystatechange = function() {
+        if(httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+            let result = httpRequest.responseText;
+            if(result == "pass") {
+                alert('성공');
+            }else{
+                alert('실패');
+            }
+            document.getElementById("text").innerHTML = httpRequest.responseText;
+        }
+    }
+    httpRequest.open("post", "./ajax.php");
+    httpRequest.send(JSON.stringify(data));
+}
+
+//합격 여부 변경
+document.addEventListener("DOMContentLoaded", function() {
+    let pass = document.querySelectorAll("select[name='pass']");
+    pass.forEach(function(e) {
+        e.addEventListener("change", function() {
+            sendRequest(e.value);
+        })
+    })
+})
+
+</script>
+
+<?php
+include "../include/footer.php";
+?>
+
+<!-- ajax.php -->
+
+<?php
+include "../include/common.php";
+
+$req = file_get_contents("php://input");
+$param = json_decode($req);
+
+$param -> idx;
+$param -> status;
+
+$qry = "update applicant set pass = '".$param -> status."' where idx = ".$param -> idx."";
+$result = mysqli_query($connect, $qry);
+if($result == true) {
+    echo "pass";
+}else{
+    echo "fail";
+}
+?>
