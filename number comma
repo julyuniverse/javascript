@@ -1,0 +1,6 @@
+Intl.NumberFormat
+
+var number = 3500;
+
+console.log(new Intl.NumberFormat().format(number));
+// → 한국 로케일의 경우 '3,500' 표시
