@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="button">click</button>
+    <h1 class="target">fadeIn, fadeOut</h1>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let button = document.querySelector('.button');
+        let target = document.querySelector('.target');
+        button.addEventListener('click', function() {
+            if(window.getComputedStyle(target).display === "none") {
+                fadeIn(target);
+            }else{
+                fadeOut(target);
+            }
+        })
+    })
+
+    function fadeOut(el) {
+        el.style.opacity = 1;
+        window.requestAnimationFrame(fade);
+        let opacity = 1;
+        function fade() {
+            opacity -= 0.01;
+            el.style.setProperty('opacity', ''+opacity+'');
+            if(opacity > 0) window.requestAnimationFrame(fade); 
+            if(opacity < 0) el.style.display = "none";
+        }
+    }
+
+    function fadeIn(el) {
+        el.style.display = "block";
+        el.style.opacity = 0;
+        window.requestAnimationFrame(fade);
+        let opacity = 0;
+        function fade() {
+            opacity += 0.001;
+            el.style.setProperty('opacity', ''+opacity+'');
+            if(opacity < 1) window.requestAnimationFrame(fade);
+        }
+    }
+    </script>
+</body>
+</html>
