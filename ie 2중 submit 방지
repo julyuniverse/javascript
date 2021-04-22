@@ -1,0 +1,1 @@
+form 태그에 onsubmit이 걸려 있다면 해당 함수 마지막에 return true를 입력해 준다.
