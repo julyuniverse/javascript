@@ -1,0 +1,4 @@
+// auto input
+let name = document.querySelector("#write .content2 .desc1 input[name='name']");
+let innertextName = document.querySelector("#write .content2 .desc1 .innertext_name");
+name.addEventListener('input', (e) => {	innertextName.innerText = e.target.value; });
