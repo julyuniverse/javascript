@@ -1,0 +1,4 @@
+let parent = document.getElementById("parent");
+while(parent.hasChildNodes()) {
+  parent.removeChild(parent.firstChild);
+}
