@@ -1,0 +1,10 @@
+let menu = document.querySelectorAll('.menu');
+menu.forEach(function(e) {
+	e.addEventListener('click', function() {
+		if(window.getComputedStyle(e.childNodes.item(2)).display === "none") {
+			e.childNodes.item(2).style.display = "block";
+		}else{
+			e.childNodes.item(2).style.display = "none";
+		}
+	});
+});
