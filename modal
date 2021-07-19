@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .lts_modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .lts_modal_content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            width: 800px;
+            padding: 20px;
+            border: 1px solid #D1D5DB;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="lts_modal" class="lts_modal">
+    <div class="lts_modal_content">
+        <table>
+            <tr>
+                <td>subject</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>subject</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+              <td>
+                  <button class="close">취소</button>
+              </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>레벨</th>
+                <th>단원</th>
+                <th>단원 이름(한글)</th>
+                <th>단원 이름(영문)</th>
+                <th>스테이지</th>
+                <th>스테이지 이름(한글)</th>
+                <th>스테이지 이름(영문)</th>
+                <th>사용 여부</th>
+                <th>기능</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $qry = "select * from table";
+            $result = mysqli_query($conn, $qry);
+            while ($row = mysqli_fetch_array($result)) {
+                ?>
+                <tr>                 
+                    <td>
+                        <button style="white-space: nowrap;" onclick="update('<?= $row['column'] ?>', '<?= $row['column'] ?>');">
+                            수정
+                        </button>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let modal = document.getElementById('lts_modal');
+    let close_btn = document.querySelector(".close");
+
+    // update
+    function update(name, name) {
+        modal.style.display = "block";
+        document.querySelector('#lts_modal input[name=name]').value = name;
+        document.querySelector('#lts_modal input[name=name]').value = name;
+    }
+
+    close_btn.addEventListener('click', function () {
+        modal.style.display = "none";
+    })
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
